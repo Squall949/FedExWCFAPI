@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FedExShippingWCF.FedExShippingService" CodeBehind="FedExShippingService..svc.cs" %>
