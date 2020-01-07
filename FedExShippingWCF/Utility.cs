@@ -87,18 +87,18 @@ namespace FedExShippingWCF
             request.AddressesToValidate[0].Address = new FedExAddressValidationService.Address();
 
             List<string> streetLines = new List<string>();
-            streetLines.Add(req.DestAddress1.Trim());
+            streetLines.Add(req.Recipient.Address1.Trim());
 
-            if (!string.IsNullOrEmpty(req.DestAddress2.Trim()))
+            if (!string.IsNullOrEmpty(req.Recipient.Address2.Trim()))
             {
-                streetLines.Add(req.DestAddress2.Trim());
+                streetLines.Add(req.Recipient.Address2.Trim());
             }
             request.AddressesToValidate[0].Address.StreetLines = streetLines.ToArray();
 
-            request.AddressesToValidate[0].Address.PostalCode = req.DestPostcode.Trim();
-            request.AddressesToValidate[0].Address.City = req.DestCity.Trim();
-            request.AddressesToValidate[0].Address.StateOrProvinceCode = req.DestState.Trim();
-            request.AddressesToValidate[0].Address.CountryCode = req.DestCountryCode.Trim();
+            request.AddressesToValidate[0].Address.PostalCode = req.Recipient.Postcode.Trim();
+            request.AddressesToValidate[0].Address.City = req.Recipient.City.Trim();
+            request.AddressesToValidate[0].Address.StateOrProvinceCode = req.Recipient.State.Trim();
+            request.AddressesToValidate[0].Address.CountryCode = req.Recipient.CountryCode.Trim();
         }
 
         #endregion
@@ -165,12 +165,12 @@ namespace FedExShippingWCF
             request.Version = new FedExAvailabilityValidationService.VersionId();
             //
             request.Origin = new FedExAvailabilityValidationService.Address(); // Origin information
-            request.Origin.PostalCode = req.ShippingPostcode.Trim();
-            request.Origin.CountryCode = req.ShippingCountryCode.Trim();
+            request.Origin.PostalCode = req.Shipper.Postcode.Trim();
+            request.Origin.CountryCode = req.Shipper.CountryCode.Trim();
             //
             request.Destination = new FedExAvailabilityValidationService.Address(); // Destination information
-            request.Destination.PostalCode = req.DestPostcode.Trim();
-            request.Destination.CountryCode = req.DestCountryCode.Trim();
+            request.Destination.PostalCode = req.Recipient.Postcode.Trim();
+            request.Destination.CountryCode = req.Recipient.CountryCode.Trim();
             //
             request.ShipDate = DateTime.Now; // Shipping date and time
 

@@ -140,6 +140,20 @@ namespace FedExShippingWCF
         }
     }
 
+    public class FedExWebServiceContact
+    {
+        public string Name { get; set; }
+        public string Company { get; set; }
+        public string Tel { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
+        public string Postcode { get; set; }
+        public string State { get; set; }
+        public string CountryCode { get; set; }
+        public string Email { get; set; }
+    }
+
     [DataContract]
     public class FedExWebServiceRequest
     {
@@ -149,24 +163,9 @@ namespace FedExShippingWCF
         decimal? unitPrice;
         string qty;
         string totalQty;
-        string shippingAddress1;
-        string shippingAddress2;
-        string shippingCity;
-        string shippingPostcode;
-        string shippingState;
-        string shippingCountryCode;
-        string shippingCName;
-        string shippingTel;
-        string destAddress1;
-        string destAddress2;
-        string destCity;
-        string destPostcode;
-        string destState;
-        string destCountryCode;
-        string destCName;
-        string destCompany;
-        string destTel;
-        string destEmail;
+        FedExWebServiceContact shipper;
+        FedExWebServiceContact recipient;
+        FedExWebServiceContact thirdParty;
         string length;
         string width;
         string height;
@@ -175,21 +174,10 @@ namespace FedExShippingWCF
         string podate;
         string id_num;
         bool isEmail;
-        string emailFail;
         string description;
         string partno;
         string bill_to;
-        string shippingAttention;
         string shippingAccNum;
-        string tpCName;
-        string tpAttention;
-        string tpAddress1;
-        string tpAddress2;
-        string tpCity;
-        string tpState;
-        string tpPostcode;
-        string tpCountry;
-        string tpTel;
         string tpAccNum;
         string masterTrackNo;
         string sequenceNumber;
@@ -238,131 +226,24 @@ namespace FedExShippingWCF
         }
 
         [DataMember]
-        public string ShippingAddress1
+        public FedExWebServiceContact Shipper
         {
-            get { return string.IsNullOrEmpty(shippingAddress1) ? string.Empty : shippingAddress1; }
-            set { shippingAddress1 = value; }
+            get { return shipper == null ? new FedExWebServiceContact() : shipper; }
+            set { shipper = value; }
         }
 
         [DataMember]
-        public string ShippingAddress2
+        public FedExWebServiceContact Recipient
         {
-            get {
-                return string.IsNullOrEmpty(shippingAddress2) ? string.Empty : shippingAddress2;
-            }
-            set { shippingAddress2 = value; }
+            get { return recipient == null ? new FedExWebServiceContact() : recipient; }
+            set { recipient = value; }
         }
 
         [DataMember]
-        public string ShippingCity
+        public FedExWebServiceContact ThirdParty
         {
-            get { return string.IsNullOrEmpty(shippingCity) ? string.Empty : shippingCity; }
-            set { shippingCity = value; }
-        }
-
-        [DataMember]
-        public string ShippingPostcode
-        {
-            get { return string.IsNullOrEmpty(shippingPostcode) ? string.Empty : shippingPostcode; }
-            set { shippingPostcode = value; }
-        }
-
-        [DataMember]
-        public string ShippingState
-        {
-            get { return string.IsNullOrEmpty(shippingState) ? string.Empty : shippingState; }
-            set { shippingState = value; }
-        }
-
-        [DataMember]
-        public string ShippingCountryCode
-        {
-            get { return string.IsNullOrEmpty(shippingCountryCode) ? string.Empty : shippingCountryCode; }
-            set { shippingCountryCode = value; }
-        }
-
-        [DataMember]
-        public string ShippingCName
-        {
-            get { return string.IsNullOrEmpty(shippingCName) ? string.Empty : shippingCName; }
-            set { shippingCName = value; }
-        }
-
-        [DataMember]
-        public string ShippingTel
-        {
-            get { return string.IsNullOrEmpty(shippingTel) ? string.Empty : shippingTel; }
-            set { shippingTel = value; }
-        }
-
-        [DataMember]
-        public string DestAddress1
-        {
-            get { return string.IsNullOrEmpty(destAddress1) ? string.Empty : destAddress1; }
-            set { destAddress1 = value; }
-        }
-
-        [DataMember]
-        public string DestAddress2
-        {
-            get { return string.IsNullOrEmpty(destAddress2) ? string.Empty : destAddress2; }
-            set { destAddress2 = value; }
-        }
-
-        [DataMember]
-        public string DestCity
-        {
-            get { return string.IsNullOrEmpty(destCity) ? string.Empty : destCity; }
-            set { destCity = value; }
-        }
-
-        [DataMember]
-        public string DestPostcode
-        {
-            get { return string.IsNullOrEmpty(destPostcode) ? string.Empty : destPostcode; }
-            set { destPostcode = value; }
-        }
-
-        [DataMember]
-        public string DestState
-        {
-            get { return string.IsNullOrEmpty(destState) ? string.Empty : destState; }
-            set { destState = value; }
-        }
-
-        [DataMember]
-        public string DestCountryCode
-        {
-            get { return string.IsNullOrEmpty(destCountryCode) ? string.Empty : destCountryCode; }
-            set { destCountryCode = value; }
-        }
-
-        [DataMember]
-        public string DestCName
-        {
-            get { return string.IsNullOrEmpty(destCName) ? string.Empty : destCName; }
-            set { destCName = value; }
-        }
-
-        [DataMember]
-        public string DestTel
-        {
-            get { return string.IsNullOrEmpty(destTel) ? string.Empty : destTel; }
-            set { destTel = value; }
-        }
-
-        [DataMember]
-        public string DestCompany
-        {
-            get { return string.IsNullOrEmpty(destCompany) ? string.Empty : destCompany; }
-            set { destCompany = value; }
-        }
-
-        [DataMember]
-        public string DestEmail
-        {
-            get { return string.IsNullOrEmpty(destEmail) ? string.Empty : destEmail; }
-            set { destEmail = value; }
+            get { return thirdParty == null ? new FedExWebServiceContact() : thirdParty; }
+            set { thirdParty = value; }
         }
 
         [DataMember]
@@ -422,13 +303,6 @@ namespace FedExShippingWCF
         }
 
         [DataMember]
-        public string EmailFail
-        {
-            get { return string.IsNullOrEmpty(emailFail) ? string.Empty : emailFail; }
-            set { emailFail = value; }
-        }
-
-        [DataMember]
         public string Description
         {
             get { return string.IsNullOrEmpty(description) ? string.Empty : description; }
@@ -450,80 +324,10 @@ namespace FedExShippingWCF
         }
 
         [DataMember]
-        public string ShippingAttention
-        {
-            get { return string.IsNullOrEmpty(shippingAttention) ? string.Empty : shippingAttention; }
-            set { shippingAttention = value; }
-        }
-
-        [DataMember]
         public string ShippingAccNum
         {
             get { return string.IsNullOrEmpty(shippingAccNum) ? string.Empty : shippingAccNum; }
             set { shippingAccNum = value; }
-        }
-
-        [DataMember]
-        public string TpCName
-        {
-            get { return string.IsNullOrEmpty(tpCName) ? string.Empty : tpCName; }
-            set { tpCName = value; }
-        }
-
-        [DataMember]
-        public string TpAttention
-        {
-            get { return string.IsNullOrEmpty(tpAttention) ? string.Empty : tpAttention; }
-            set { tpAttention = value; }
-        }
-
-        [DataMember]
-        public string TpAddress1
-        {
-            get { return string.IsNullOrEmpty(tpAddress1) ? string.Empty : tpAddress1; }
-            set { tpAddress1 = value; }
-        }
-
-        [DataMember]
-        public string TpAddress2
-        {
-            get { return string.IsNullOrEmpty(tpAddress2) ? string.Empty : tpAddress2; }
-            set { tpAddress2 = value; }
-        }
-
-        [DataMember]
-        public string TpCity
-        {
-            get { return string.IsNullOrEmpty(tpCity) ? string.Empty : tpCity; }
-            set { tpCity = value; }
-        }
-
-        [DataMember]
-        public string TpState
-        {
-            get { return string.IsNullOrEmpty(tpState) ? string.Empty : tpState; }
-            set { tpState = value; }
-        }
-
-        [DataMember]
-        public string TpPostcode
-        {
-            get { return string.IsNullOrEmpty(tpPostcode) ? string.Empty : tpPostcode; }
-            set { tpPostcode = value; }
-        }
-
-        [DataMember]
-        public string TpCountry
-        {
-            get { return string.IsNullOrEmpty(tpCountry) ? string.Empty : tpCountry; }
-            set { tpCountry = value; }
-        }
-
-        [DataMember]
-        public string TpTel
-        {
-            get { return string.IsNullOrEmpty(tpTel) ? string.Empty : tpTel; }
-            set { tpTel = value; }
         }
 
         [DataMember]

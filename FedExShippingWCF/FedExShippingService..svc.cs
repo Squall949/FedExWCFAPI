@@ -640,7 +640,7 @@ namespace FedExShippingWCF
             // Notification
             request.RequestedShipment.SpecialServicesRequested = new ShipmentSpecialServicesRequested();
 
-            if (shippingRequest.IsEmail && !string.IsNullOrWhiteSpace(shippingRequest.DestEmail))
+            if (shippingRequest.IsEmail && !string.IsNullOrWhiteSpace(shippingRequest.Recipient.Email))
             {
                 request.RequestedShipment.SpecialServicesRequested.SpecialServiceTypes = new ShipmentSpecialServiceType[] { ShipmentSpecialServiceType.EVENT_NOTIFICATION };
                 request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail = new ShipmentEventNotificationDetail();
@@ -650,7 +650,7 @@ namespace FedExShippingWCF
                 request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].NotificationDetail.NotificationType = NotificationType.EMAIL;
                 request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].NotificationDetail.NotificationTypeSpecified = true;
                 request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].NotificationDetail.EmailDetail = new EMailDetail();
-                request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].NotificationDetail.EmailDetail.EmailAddress = shippingRequest.DestEmail;
+                request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].NotificationDetail.EmailDetail.EmailAddress = shippingRequest.Recipient.Email;
                 request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].Role = ShipmentNotificationRoleType.RECIPIENT;
                 request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].RoleSpecified = true;
                 request.RequestedShipment.SpecialServicesRequested.EventNotificationDetail.EventNotifications[0].Events = new NotificationEventType[2] { NotificationEventType.ON_DELIVERY, NotificationEventType.ON_SHIPMENT };
@@ -711,27 +711,27 @@ namespace FedExShippingWCF
 
             List<string> streetLines = new List<string>();
 
-            streetLines.Add(shippingRequest.ShippingAddress1.Trim());
-            if (!string.IsNullOrEmpty(shippingRequest.ShippingAddress2.Trim()))
+            streetLines.Add(shippingRequest.Shipper.Address1.Trim());
+            if (!string.IsNullOrEmpty(shippingRequest.Shipper.Address2.Trim()))
             {
-                streetLines.Add(shippingRequest.ShippingAddress2.Trim());
+                streetLines.Add(shippingRequest.Shipper.Address2.Trim());
             }
             request.RequestedShipment.Shipper.Address.StreetLines = streetLines.ToArray();
-            request.RequestedShipment.Shipper.Address.City = shippingRequest.ShippingCity.Trim();
-            request.RequestedShipment.Shipper.Address.StateOrProvinceCode = shippingRequest.ShippingState.Trim();
-            request.RequestedShipment.Shipper.Address.PostalCode = shippingRequest.ShippingPostcode.Trim();
-            request.RequestedShipment.Shipper.Address.CountryCode = shippingRequest.ShippingCountryCode.Trim();
+            request.RequestedShipment.Shipper.Address.City = shippingRequest.Shipper.City.Trim();
+            request.RequestedShipment.Shipper.Address.StateOrProvinceCode = shippingRequest.Shipper.State.Trim();
+            request.RequestedShipment.Shipper.Address.PostalCode = shippingRequest.Shipper.Postcode.Trim();
+            request.RequestedShipment.Shipper.Address.CountryCode = shippingRequest.Shipper.CountryCode.Trim();
 
             request.RequestedShipment.Shipper.Contact = new Contact();
 
-            if (!string.IsNullOrEmpty(shippingRequest.ShippingCName.Trim()))
+            if (!string.IsNullOrEmpty(shippingRequest.Shipper.Company.Trim()))
             {
-                request.RequestedShipment.Shipper.Contact.CompanyName = shippingRequest.ShippingCName.Trim();
+                request.RequestedShipment.Shipper.Contact.CompanyName = shippingRequest.Shipper.Company.Trim();
             }
 
-            if (!string.IsNullOrEmpty(shippingRequest.ShippingTel.Trim()))
+            if (!string.IsNullOrEmpty(shippingRequest.Shipper.Tel.Trim()))
             {
-                request.RequestedShipment.Shipper.Contact.PhoneNumber = shippingRequest.ShippingTel.Trim();
+                request.RequestedShipment.Shipper.Contact.PhoneNumber = shippingRequest.Shipper.Tel.Trim();
             }
         }
 
@@ -741,33 +741,33 @@ namespace FedExShippingWCF
             request.RequestedShipment.Recipient.Address = new Address();
 
             List<string> streetLines = new List<string>();
-            streetLines.Add(shippingRequest.DestAddress1.Trim());
+            streetLines.Add(shippingRequest.Recipient.Address1.Trim());
 
-            if (!string.IsNullOrEmpty(shippingRequest.DestAddress2.Trim()))
+            if (!string.IsNullOrEmpty(shippingRequest.Recipient.Address2.Trim()))
             {
-                streetLines.Add(shippingRequest.DestAddress2.Trim());
+                streetLines.Add(shippingRequest.Recipient.Address2.Trim());
             }
 
             request.RequestedShipment.Recipient.Address.StreetLines = streetLines.ToArray();
 
-            request.RequestedShipment.Recipient.Address.City = shippingRequest.DestCity.Trim();
-            request.RequestedShipment.Recipient.Address.StateOrProvinceCode = shippingRequest.DestState.Trim();
-            request.RequestedShipment.Recipient.Address.PostalCode = shippingRequest.DestPostcode.Trim();
-            request.RequestedShipment.Recipient.Address.CountryCode = shippingRequest.DestCountryCode.Trim();
+            request.RequestedShipment.Recipient.Address.City = shippingRequest.Recipient.City.Trim();
+            request.RequestedShipment.Recipient.Address.StateOrProvinceCode = shippingRequest.Recipient.State.Trim();
+            request.RequestedShipment.Recipient.Address.PostalCode = shippingRequest.Recipient.Postcode.Trim();
+            request.RequestedShipment.Recipient.Address.CountryCode = shippingRequest.Recipient.CountryCode.Trim();
             request.RequestedShipment.Recipient.Contact = new Contact();
 
-            if (!string.IsNullOrEmpty(shippingRequest.DestCName.Trim()))
+            if (!string.IsNullOrEmpty(shippingRequest.Recipient.Name.Trim()))
             {
-                request.RequestedShipment.Recipient.Contact.PersonName = shippingRequest.DestCName.Trim();
+                request.RequestedShipment.Recipient.Contact.PersonName = shippingRequest.Recipient.Name.Trim();
             }
-            if (!string.IsNullOrEmpty(shippingRequest.DestCompany.Trim()))
+            if (!string.IsNullOrEmpty(shippingRequest.Recipient.Company.Trim()))
             {
-                request.RequestedShipment.Recipient.Contact.CompanyName = shippingRequest.DestCompany.Trim();
+                request.RequestedShipment.Recipient.Contact.CompanyName = shippingRequest.Recipient.Company.Trim();
             }
 
-            if (!string.IsNullOrEmpty(shippingRequest.DestTel.Trim()))
+            if (!string.IsNullOrEmpty(shippingRequest.Recipient.Tel.Trim()))
             {
-                request.RequestedShipment.Recipient.Contact.PhoneNumber = shippingRequest.DestTel.Trim();
+                request.RequestedShipment.Recipient.Contact.PhoneNumber = shippingRequest.Recipient.Tel.Trim();
             }
 
             // HOME_DELIVERY needs to check the residential address
