@@ -9,10 +9,10 @@
       <Value Profile="(Default)">https://ws.fedex.com:443/web-services/ValidationAvailabilityAndCommitment</Value>
     </Setting>
     <Setting Name="FedExShippingWCF_FedExShipService_ShipService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://ws.fedex.com:443/web-services/ship</Value>
+      <Value Profile="(Default)">https://wsbeta.fedex.com:443/web-services/ship</Value>
     </Setting>
     <Setting Name="FedExShippingWCF_RateService_RateService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://ws.fedex.com:443/web-services/rate</Value>
+      <Value Profile="(Default)">https://wsbeta.fedex.com:443/web-services/rate</Value>
     </Setting>
   </Settings>
 </SettingsFile>

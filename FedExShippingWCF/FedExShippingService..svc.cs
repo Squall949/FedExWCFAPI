@@ -632,9 +632,9 @@ namespace FedExShippingWCF
             // Label
             request.RequestedShipment.LabelSpecification = new LabelSpecification();
             request.RequestedShipment.LabelSpecification.LabelFormatType = LabelFormatType.COMMON2D;
-            request.RequestedShipment.LabelSpecification.ImageType = ShippingDocumentImageType.PNG;
+            request.RequestedShipment.LabelSpecification.ImageType = ShippingDocumentImageType.PDF;
             request.RequestedShipment.LabelSpecification.ImageTypeSpecified = true;
-            request.RequestedShipment.LabelSpecification.LabelStockType = LabelStockType.PAPER_4X6;
+            request.RequestedShipment.LabelSpecification.LabelStockType = LabelStockType.STOCK_4X6;
             request.RequestedShipment.LabelSpecification.LabelStockTypeSpecified = true;
 
             // Notification
